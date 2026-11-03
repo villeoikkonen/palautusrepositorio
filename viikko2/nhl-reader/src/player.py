@@ -9,7 +9,7 @@ class Player:
         self.id = dict['id']
     
     def __str__(self):
-        return f"{self.name} team {self.team} goals {self.goals} assists {self.assists}"
+        return f"{self.name:20} team {self.team:15} {self.goals} + {self.assists} = {self.goals + self.assists}"
 
 
 #{'name': 'Cole Schwindt', 'nationality': 'CAN', 'assists': 7, 'goals': 1, 'team': 'VGK', 'games': 42, 'id': 8481655}]

@@ -19,7 +19,7 @@ def main():
     for player in players:
         if player.nationality == "FIN":
             fins.append(player)
-    for fin in fins:
+    for fin in sorted(fins, key=lambda x: x.goals+x.assists, reverse=True):
         print(fin)
 
 if __name__ == "__main__":
