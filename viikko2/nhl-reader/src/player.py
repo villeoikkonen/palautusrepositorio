@@ -1,4 +1,7 @@
 import requests
+from rich.console import Console
+from rich.table import Table
+from rich import box
 
 class Player:
     def __init__(self, dict):
@@ -8,7 +11,7 @@ class Player:
         self.goals = dict['goals']
         self.team = dict['team']
         self.games = dict['games']
-        self.id = dict['id']
+        #self.id = dict['id']
     
     def __str__(self):
         return f"{self.name:20} team {self.team:15} {self.goals} + {self.assists} = {self.goals + self.assists}"
@@ -37,5 +40,33 @@ class PlayerStats:
             key=lambda player: player.goals + player.assists
         )
         return list(sorted_players)
+    
+def show_players(players, season, nationality):
+    table = Table(
+        title=f"Season {season} players from {nationality}",
+        title_style="italic",
+        header_style="bold white",
+        box=box.SQUARE,
+        padding=(0, 1),
+    )
+
+    table.add_column("Player", style="cyan", no_wrap=True)
+    table.add_column("teams", style="magenta")
+    table.add_column("goals", style="green", justify="right")
+    table.add_column("assists", style="green", justify="right")
+    table.add_column("points", style="green", justify="right")
+
+    for player in players:
+        table.add_row(
+            player.name,
+            player.team,
+            str(player.goals),
+            str(player.assists),
+            str(player.goals + player.assists),
+        )
+
+    console = Console()
+    console.print(table)
+
 
 #{'name': 'Cole Schwindt', 'nationality': 'CAN', 'assists': 7, 'goals': 1, 'team': 'VGK', 'games': 42, 'id': 8481655}]
