@@ -19,26 +19,36 @@ class PlayerStats: # pylint: disable=too-few-public-methods
     def __init__(self, reader):
         self.players = reader.get_players()
 
+    def _top_scorers(self, players):
+        sorted_players = sorted(
+            players,
+            reverse=True,
+            key=lambda player: player.goals + player.assists
+        )
+        return list(sorted_players)
+
     def top_scorers_by_nationality(self, nationality):
         players_of_nationality = filter(
             lambda player: player.nationality == nationality,
             self.players
         )
-        sorted_players = sorted(
-            players_of_nationality,
-            reverse=True,
-            key=lambda player: player.goals + player.assists
+        return self._top_scorers(players_of_nationality)
+
+    def top_scorers_by_team(self, team):
+        players_of_team = filter(
+            lambda player: player.team == team,
+            self.players
         )
-        return list(sorted_players)
+        return self._top_scorers(players_of_team)
 
 def get_players(url):
     response = requests.get(url, timeout=2).json()
     players = [Player(player_dict) for player_dict in response]
     return players
 
-def show_players(players, season, nationality):
+def show_players(players, season, team):
     table = Table(
-        title=f"Season {season} players from {nationality}",
+        title=f"Season {season} players from {team}",
         title_style="italic",
         header_style="bold white",
         box=box.SQUARE,

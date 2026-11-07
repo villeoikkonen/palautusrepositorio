@@ -11,12 +11,12 @@ def main():
     stats = PlayerStats(reader)
 
     while True:
-        nationalities = set(player.nationality for player in stats.players)
-        nationality = Prompt.ask("Nationality", choices=nationalities, default="")
+        teams = set(player.team for player in stats.players)
+        team = Prompt.ask("Team", choices=teams, default="")
 
-        players = stats.top_scorers_by_nationality(nationality)
+        players = stats.top_scorers_by_team(team)
 
-        show_players(players, season, nationality)
+        show_players(players, season, team)
     #break
 
 if __name__ == "__main__":
