@@ -9,6 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project:
+          - viikko3/login
+          # Add future projects here
     steps:
       - uses: actions/checkout@v5
       - name: Install uv
@@ -17,7 +22,10 @@ jobs:
           python-version: '3.14'
       - name: Install dependencies
         run: uv sync
+        working-directory: ${{ matrix.project }}
       - name: Install Playwright browser
         run: uv run rfbrowser install --with-deps chromium
+        working-directory: ${{ matrix.project }}
       - name: Run robot tests
         run: bash run_robot_tests.sh
+        working-directory: ${{ matrix.project }}
