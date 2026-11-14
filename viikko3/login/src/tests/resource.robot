@@ -24,9 +24,25 @@ Open And Configure Browser
 Login Page Should Be Open
     Get Title  ==  Login
 
+Register Page Should Be Open
+    Get Title  ==  Register
+
 Main Page Should Be Open
     Get Title  ==  Ohtu Application main page
+
+Welcome Page Should Be Open
+    Get Title  ==  Welcome to Ohtu Application!
 
 Go To Login Page
     Go To  ${LOGIN_URL}
 
+Go To Register Page
+    Go To  ${REGISTER_URL}
+
+Set Username
+    [Arguments]  ${username}
+    Fill Text  id=username  ${username}
+
+Set Password
+    [Arguments]  ${password}
+    Fill Text  id=password  ${password}
