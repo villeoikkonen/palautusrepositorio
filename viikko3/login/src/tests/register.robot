@@ -8,15 +8,57 @@ Test Setup      Reset Application Create User And Go To Register Page
 
 Register With Valid Username And Password
     Set Username  validuser
-    Set Password  validpassword
-    Set Password confirmation  validpassword
+    Set Password  validpassword123
+    Set Password confirmation  validpassword123
     Click  button >> text=Register
     Register Should Succeed
 
+Register With Matching Password And Confirmation
+    Set Username  matchinguser
+    Set Password  matchingpassword123
+    Set Password confirmation  matchingpassword123
+    Click  button >> text=Register
+    Register Should Succeed
+
+Register With Different Password And Confirmation
+    Set Username  differentuser
+    Set Password  matchingpassword123
+    Set Password confirmation  differentpassword123
+    Click  button >> text=Register
+    Register Should Fail With Message  Password and password confirmation must match
+
+Register With Password Containing Letters And Numbers
+    Set Username  validuser3
+    Set Password  kalle123
+    Set Password confirmation  kalle123
+    Click  button >> text=Register
+    Register Should Succeed
+
+Register With Password Containing Letters And Special Characters
+    Set Username  validuser4
+    Set Password  kalle#abc
+    Set Password confirmation  kalle#abc
+    Click  button >> text=Register
+    Register Should Succeed
+
+Register With Lowercase Letters Only Password
+    Set Username  validuser5
+    Set Password  kallekalle
+    Set Password confirmation  kallekalle
+    Click  button >> text=Register
+    Register Should Fail With Message  Password must contain at least one non-letter character
+
+Register With Uppercase And Lowercase Letters Only Password
+    Set Username  validuser6
+    Set Password  KalleKalle
+    Set Password confirmation  KalleKalle
+    Click  button >> text=Register
+    Register Should Fail With Message  Password must contain at least one non-letter character
+
 Register With Too Short Username And Valid Password
     Set Username  ab
-    Set Password  validpassword
-    Set Password confirmation  validpassword
+    Set Password  validpassword123
+    Set Password confirmation  validpassword123
     Click  button >> text=Register
     Register Should Fail With Message  Username must be at least 3 characters long
 
@@ -29,14 +71,14 @@ Register With Valid Username And Too Short Password
 
 Register With Username That Is Already In Use
     Set Username  validuser
-    Set Password  anotherpassword
-    Set Password confirmation  anotherpassword
+    Set Password  anotherpassword123
+    Set Password confirmation  anotherpassword123
     Click  button >> text=Register
     Register Should Succeed
     Go To Register Page
     Set Username  validuser
-    Set Password  anotherpassword2
-    Set Password confirmation  anotherpassword2
+    Set Password  anotherpassword456
+    Set Password confirmation  anotherpassword456
     Click  button >> text=Register
     Register Should Fail With Message  User with username validuser already exists
 
