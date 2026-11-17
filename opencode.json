@@ -1,0 +1,7 @@
+{
+  : https://opencode.ai/config.json,
+  permission: {
+    bash: ask,
+    edit: ask
+  }
+}
