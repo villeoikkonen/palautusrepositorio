@@ -10,3 +10,5 @@
   ```
 - `run_robot_tests.sh` starts the Flask app on port 5001, waits for it, runs all Robot suites headlessly, then stops the process listening on that port. Do not run it while another service you need is using port 5001.
 - To run one suite, start the app with `uv run python3 src/index.py` from `viikko3/login`, then in another shell run `uv run robot --variable HEADLESS:true src/tests/<suite>.robot`; stop the app afterward. For example, `<suite>` can be `login` or `register`.
+- For `viikko4/verkkokauppa`, use Python 3.14 and `uv` (`pyproject.toml`/`uv.lock`); run `uv sync` and `uv run pytest` from that directory. The focused test file is `src/tests/kauppa_test.py`; these are unit tests and need no external service.
+- In `viikko4/verkkokauppa`, `src/index.py` is a runnable example flow, while the shop components are separate modules under `src/` and tests import them directly.
